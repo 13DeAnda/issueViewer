@@ -55,7 +55,7 @@ var Comments = React.createClass({
 	    	    				comment.body = comment.body.replace(username, hyperlink);
 	    	    			});
 
-
+	    	    			//some 
 	    	    			return (<div style ={styles.commentContainer} dangerouslySetInnerHTML={{__html: comment.body}} />)
 	    	    			
 	    	    		})}
