@@ -4,16 +4,16 @@ import Issues from './issues.jsx';
 
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+	constructor(props) {
+		super(props);
+	}
 
-  render() {
+	render() {
 
-    return (
-      <div>
-      	<Issues />
-      </div>
-    );
-  }
+		return (
+			<div>
+				<Issues />
+			</div>
+		);
+	}
 }
