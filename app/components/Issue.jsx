@@ -41,48 +41,48 @@ const styles = {
 };
 
 var Issue = React.createClass({
-    
-    goToIssue (){
-    	console.log("go to ", this.props.data.id);
-    },
+	
+	goToIssue (){
+		this.props.viewIndividual(this.props.index);
+	},
 
 	render() {
 
 		var descriptionTrimmed = this.props.data.body.slice(0,139);
+		return (
+			<Grid style={styles.container}>
 
-	    return (
-	    	<Grid style={styles.container}>
+				<Row >
+					<Col sm={1} style= {styles.idContainer} >#{this.props.data.id} </Col>
+					<Col sm={5} style= {styles.titleContainer} > {this.props.data.title} </Col>
+					
+					<Col sm={4} > 
+						{_.map(this.props.data.labels, (label, key) =>{
+								var newTagStyle = styles.tag;
+								newTagStyle.backgroundColor = '#'+label.color;
+								return ( <div key={key} style= {newTagStyle}> {label.name} </div>);
+						})}
+					</Col>
+				</Row>
 
-	    		<Row >
-	    			<Col sm={1} style= {styles.idContainer} >#{this.props.data.id} </Col>
-	    			<Col sm={5} style= {styles.titleContainer} > {this.props.data.title} </Col>
-	    			
-	    			<Col sm={4} > 
-	    				{_.map(this.props.data.labels, (label) =>{
-	    						var newTagStyle = styles.tag;
-	    						newTagStyle.backgroundColor = '#'+label.color;
-	    						return ( <div style= {newTagStyle}> {label.name} </div>);
-	    				})}
-	    			</Col>
-	    		</Row>
+				<Row style={{marginTop:"10px"}}>
+					<Col sm={1}  style= {styles.userContainer}>
+						<a href={"https://github.com/"+this.props.data.user.login} > {this.props.data.user.login} </a> <br />
+						<img  style={styles.avatarImage} 
+							  src={this.props.data.user.avatar_url} />
+					</Col>
 
-	    		<Row style={{marginTop:"10px"}}>
-	    			<Col sm={1}  style= {styles.userContainer}>
-	    				<a href= {"https://github.com/"+this.props.data.user.login} > {this.props.data.user.login} </a> <br />
-	    				<img  style= {styles.avatarImage} src= {this.props.data.user.avatar_url} />
-	    			</Col>
+					<Col sm={8} >
+						{descriptionTrimmed+"..." }
+					</Col>
+					<Col sm={1}>
+						<Button onClick={this.goToIssue} bsStyle="default" >more</Button>
+					</Col>
+				</Row>
 
-	    			<Col sm={8} >
-	    				{descriptionTrimmed+"..." }
-	    			</Col>
-	    			<Col sm={1}>
-	    				<Button onClick={this.goToIssue} bsStyle="default" >more</Button>
-	    			</Col>
-	    		</Row>
-
-	        </Grid>
-	    );
-  	}
+			</Grid>
+		);
+	}
 });
 
 
